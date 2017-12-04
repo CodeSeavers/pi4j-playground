@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -93,19 +92,4 @@
 			</plugin>
 		</plugins>
 	</build>
-=======
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.codeseavers</groupId>
-  <artifactId>pi4j-playground</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>com.codeseavers.pi4j-playground</name>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.pi4j</groupId>
-  		<artifactId>pi4j-core</artifactId>
-  		<version>1.1</version>
-  	</dependency>
-  </dependencies>
->>>>>>> 3367ac2672fef4ea02a8b890c9e76e627792aa94
 </project>
