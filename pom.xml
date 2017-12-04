@@ -72,7 +72,7 @@
 							<target>
 								<scp file="${project.basedir}/target/${artifact_name}.jar"
 									todir="${scp.user}@${scp.host}:${scp.dirCopyTo}"
-									keyfile="${user.home}/.ssh/id_rsa" passphrase="" verbose="true" failonerror="false" />
+									keyfile="${user.home}/.ssh/id_rsa" passphrase="" trust="true" verbose="true" failonerror="false" />
 							</target>
 						</configuration>
 					</execution>
@@ -86,7 +86,7 @@
 					<dependency>
 						<groupId>com.jcraft</groupId>
 						<artifactId>jsch</artifactId>
-						<version>0.1.42</version>
+						<version>0.1.54</version>
 					</dependency>
 				</dependencies>
 			</plugin>
