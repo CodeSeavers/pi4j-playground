@@ -11,7 +11,7 @@ RUN apt-get update && \
 # Define version of GraalVM
 ENV GRAAL_VERSION 19.3.1
 ENV GRAAL_JAVA_VERSION 11
-ENV GRAAL_FILENAME graalvm-ce-java${GRAAL_JAVA_VERSION}-linux-amd64-${GRAAL_VERSION}.tar.gz
+ENV GRAAL_FILENAME graalvm-ce-java${GRAAL_JAVA_VERSION}-linux-aarch64-${GRAAL_VERSION}.tar.gz
 
 # Download GraalVM
 RUN curl -4 -L https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/${GRAAL_FILENAME} -o /tmp/${GRAAL_FILENAME}
@@ -27,7 +27,7 @@ RUN chmod +x /usr/lib/graalvm/bin/gu
 RUN echo $USER
 
 # RUN ls -la /usr/lib/graalvm/lib/installer/bin/
-RUN /usr/lib/graalvm/lib/installer/bin/gu install native-image
+RUN /usr/lib/graalvm/bin/gu install native-image
 # RUN ["/bin/bash", "/usr/lib/graalvm/bin/gu install native-image"]
 
 # Create a volume to which we can mount to build:
