@@ -7,7 +7,7 @@
 	<name>com.codeseavers.pi4j-playground</name>
 	<properties>
 		<scp.user>pi</scp.user>
-		<scp.host>192.168.2.50</scp.host>
+		<scp.host>192.168.2.70</scp.host>
 		<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
 		<artifact_name>pi4j_ssd1306</artifact_name>
 	</properties>
@@ -56,6 +56,15 @@
 					</descriptorRefs>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
+				<executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- bind to the packaging phase -->
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

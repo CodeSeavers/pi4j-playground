@@ -21,7 +21,7 @@ public class HelloSSD1306World {
 		Display display = null;
 		try {
 			i2c = I2CFactory.getInstance(I2C.CHANNEL_1);
-			display = new Display(128, 32, gpio, i2c, 0x3c);
+			display = new Display(128, 64, gpio, i2c, 0x3c);
 			display.begin();
 
 			int i = 0;
