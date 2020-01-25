@@ -1,4 +1,4 @@
-FROM raspbian/stretch
+FROM balenalib/rpi-raspbian:latest
 
 RUN apt-get update && \
     apt-get -y install gcc libc6-dev zlib1g-dev curl bash && \
