@@ -14,7 +14,7 @@ ENV GRAAL_JAVA_VERSION 11
 ENV GRAAL_FILENAME graalvm-ce-java${GRAAL_JAVA_VERSION}-linux-aarch64-${GRAAL_VERSION}.tar.gz
 
 # Download GraalVM
-RUN curl -4 -L https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/${GRAAL_FILENAME} -o /tmp/${GRAAL_FILENAME}
+RUN curl -4 -L -k https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/${GRAAL_FILENAME} -o /tmp/${GRAAL_FILENAME}
 
 # Untar and move the files we need:
 RUN tar -zxvf /tmp/${GRAAL_FILENAME} -C /tmp \
