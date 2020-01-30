@@ -1,9 +1,8 @@
-FROM balenalib/rpi-raspbian:latest
+FROM ubuntu:eoan
 
 RUN apt-get update && \
     apt-get -y install gcc libc6-dev zlib1g-dev curl bash && \
     rm -rf var/lib/apt/lists/*
-
 
 # https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java8-linux-amd64-19.3.1.tar.gz
 # https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java11-linux-amd64-19.3.1.tar.gz
