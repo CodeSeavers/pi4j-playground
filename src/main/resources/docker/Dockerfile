@@ -11,9 +11,9 @@ ENV JAVA_HOME /usr/lib/graalvm
 RUN apt-get update && \
     apt-get -y install gcc libc6-dev zlib1g-dev curl bash && \
     rm -rf var/lib/apt/lists/* && \
-    curl -4 -L -k https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/${GRAAL_FILENAME} -o /tmp/${GRAAL_FILENAME} $$ \
+    curl -4 -L -k https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/${GRAAL_FILENAME} -o /tmp/${GRAAL_FILENAME} && \
     tar -zxvf /tmp/${GRAAL_FILENAME} -C /tmp && \
-    mv /tmp/graalvm-ce-java${GRAAL_JAVA_VERSION}-${GRAAL_VERSION} /usr/lib/graalvm $$ \
+    mv /tmp/graalvm-ce-java${GRAAL_JAVA_VERSION}-${GRAAL_VERSION} /usr/lib/graalvm && \
     rm -rf /tmp/*
 
 # Install native-image 
