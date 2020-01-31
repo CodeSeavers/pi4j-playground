@@ -6,6 +6,7 @@ ENV GRAAL_JAVA_VERSION 11
 ENV GRAAL_FILENAME graalvm-ce-java${GRAAL_JAVA_VERSION}-linux-aarch64-${GRAAL_VERSION}.tar.gz
 ENV MAVEN_VERSION 3.6.3
 ENV JAVA_HOME /usr/lib/graalvm
+ENV PATH "/usr/lib/graalvm/bin:/usr/lib/maven/bin:${PATH}"
 
 # Install GraalVM
 RUN apt-get update && \
@@ -24,6 +25,8 @@ RUN curl -4 -L -k https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/
     tar -zxvf /tmp/apache-maven-${MAVEN_VERSION}.tar.gz -C /tmp && \
     mv /tmp/apache-maven-${MAVEN_VERSION} /usr/lib/maven && \
     rm -rf /tmp/*
+
+
 
 # Create a volume to which we can mount to build:
 VOLUME /target
