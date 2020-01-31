@@ -22,7 +22,7 @@ RUN /usr/lib/graalvm/bin/gu install native-image
 # Install Maven
 RUN curl -4 -L -k https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz -o /tmp/apache-maven-${MAVEN_VERSION}.tar.gz && \
     tar -zxvf /tmp/apache-maven-${MAVEN_VERSION}.tar.gz -C /tmp && \
-    mv /tmp/apacha-maven-${MAVEN_VERSION} /usr/lib/maven && \
+    mv /tmp/apache-maven-${MAVEN_VERSION} /usr/lib/maven && \
     rm -rf /tmp/*
 
 # Create a volume to which we can mount to build:
