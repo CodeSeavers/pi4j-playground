@@ -33,11 +33,11 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.oracle.substratevm</groupId>
+				<groupId>org.graalvm.nativeimage</groupId>
 				<artifactId>native-image-maven-plugin</artifactId>
-				<version>1.0.0-rc11</version>
+				<version>19.3.1</version>
 				<configuration>
-					<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback --no-server -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
+					<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback "-J-Xmx400m" -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
 				</configuration>
 				<executions>
 					<execution>
