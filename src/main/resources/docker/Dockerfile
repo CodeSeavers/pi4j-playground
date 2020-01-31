@@ -26,8 +26,6 @@ RUN curl -4 -L -k https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/
     mv /tmp/apache-maven-${MAVEN_VERSION} /usr/lib/maven && \
     rm -rf /tmp/*
 
-
-
 # Create a volume to which we can mount to build:
 VOLUME /target
 WORKDIR /target

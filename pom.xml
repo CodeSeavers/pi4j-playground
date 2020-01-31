@@ -37,7 +37,7 @@
 				<artifactId>native-image-maven-plugin</artifactId>
 				<version>1.0.0-rc11</version>
 				<configuration>
-					<buildArgs>-H:+ReportExceptionStackTraces</buildArgs>
+					<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback --no-server -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
 				</configuration>
 				<executions>
 					<execution>
