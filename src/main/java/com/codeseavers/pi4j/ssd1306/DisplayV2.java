@@ -123,8 +123,8 @@ public class DisplayV2 {
     }
 
     private void write(final int command) {
-        try (var i2c = pi4j.i2c().create(this.config)) {
-            i2c.write(command);
+        try {
+            this.i2c.write(command);
         } catch (final Exception e) {
             // Handle me
             System.err.println(e.getMessage());
