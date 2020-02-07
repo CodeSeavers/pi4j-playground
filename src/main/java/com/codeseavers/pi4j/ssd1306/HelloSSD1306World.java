@@ -6,7 +6,7 @@ public class HelloSSD1306World {
 			"Nachher gibt's Suppe" };
 
 	public static void main(String[] args) {
-		
+
 		DisplayV2 display = null;
 		try {
 			display = new DisplayV2();
@@ -25,6 +25,12 @@ public class HelloSSD1306World {
 
 		} finally {
 			display.clear();
+			try {
+				display.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

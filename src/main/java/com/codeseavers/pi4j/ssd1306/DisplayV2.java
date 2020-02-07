@@ -15,16 +15,17 @@ public class DisplayV2 {
 
     private final Context pi4j;
 
-    private int I2C_DEVICE = 0x3C;
+    private final int I2C_DEVICE = 0x3C;
 
     private int vccState = Constants.SSD1306_SWITCHCAPVCC;
-    private int compins = 0x12;
+    private final int compins = 0x12;
     private byte[] buffer;
-    private int width, height, pages;
+    private final int width, height, pages;
     protected BufferedImage img;
     protected Graphics2D graphics;
 
-    private I2CConfig config;
+    private final I2CConfig config;
+    private I2C i2c;
 
     public DisplayV2() throws Exception {
         this.width = 128;
@@ -40,8 +41,13 @@ public class DisplayV2 {
         this.graphics = this.img.createGraphics();
     }
 
+    public void close() throws Exception {
+        this.i2c.close();
+    }
+
     private void init() {
-        try (var i2c = pi4j.i2c().create(this.config)) {
+        try {
+            this.i2c = pi4j.i2c().create(this.config);
 
             i2c.write(Constants.SSD1306_DISPLAYOFF);
             i2c.write(Constants.SSD1306_SETDISPLAYCLOCKDIV);
@@ -83,7 +89,7 @@ public class DisplayV2 {
             i2c.write(Constants.SSD1306_DISPLAYALLON_RESUME);
             i2c.write(Constants.SSD1306_NORMALDISPLAY);
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // Handle me properly
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -106,7 +112,7 @@ public class DisplayV2 {
      * @see Constants#SSD1306_SWITCHCAPVCC
      * @see Constants#SSD1306_EXTERNALVCC
      */
-    public void begin(int vccState) throws IOException {
+    public void begin(final int vccState) throws IOException {
         this.vccState = vccState;
         // For now ignore the reset pin stuff
         // this.reset();
@@ -116,17 +122,17 @@ public class DisplayV2 {
         this.display();
     }
 
-    private void write(int command) {
+    private void write(final int command) {
         try (var i2c = pi4j.i2c().create(this.config)) {
             i2c.write(command);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // Handle me
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void writeRegister(I2C i2c, int command, int register) throws IOException {
+    private void writeRegister(final I2C i2c, final int command, final int register) throws IOException {
 
         i2c.writeRegister(register, command);
 
@@ -158,16 +164,16 @@ public class DisplayV2 {
      * 
      * @param data Data array
      */
-    private void data(byte[] data) {
-        try (var i2c = pi4j.i2c().create(this.config)) {
+    private void data(final byte[] data) {
+        try{
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < 16; j++) {
-                    this.writeRegister(i2c, 0x40, data[i]);
+                    this.writeRegister(this.i2c, 0x40, data[i]);
                     i++;
                 }
                 i--;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // Handle me
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -180,7 +186,7 @@ public class DisplayV2 {
      * @param data
      * @param line
      */
-    public void displayString(String... data) {
+    public void displayString(final String... data) {
         clearImage();
         for (int i = 0; i < data.length; i++) {
             graphics.drawString(data[i], 0, Constants.STRING_HEIGHT * (i + 1));
@@ -199,7 +205,7 @@ public class DisplayV2 {
      * @see SSD1306_I2C_Display#display()
      */
     public synchronized void displayImage() {
-        Raster r = this.img.getRaster();
+        final Raster r = this.img.getRaster();
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
@@ -218,7 +224,7 @@ public class DisplayV2 {
      * @param white White or black pixel
      * @return True if the pixel was successfully set
      */
-    public boolean setPixel(int x, int y, boolean white) {
+    public boolean setPixel(final int x, final int y, final boolean white) {
         if (x < 0 || x > this.width || y < 0 || y > this.height) {
             return false;
         }
