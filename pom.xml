@@ -9,7 +9,7 @@
 		<scp.host>192.168.2.70</scp.host>
 		<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
 		<artifact_name>pi4j_ssd1306</artifact_name>
-	
+
 		<!-- JAVA COMPILER VERSIONS -->
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
@@ -20,6 +20,16 @@
 		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-core</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pi4j</groupId>
+			<artifactId>pi4j-plugin-raspberrypi</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pi4j</groupId>
+			<artifactId>pi4j-plugin-pigpio</artifactId>
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -46,14 +56,14 @@
 				<configuration>
 					<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback --no-server -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
 				</configuration>
-				<executions>
+				<!--<executions>
 					<execution>
 						<goals>
 							<goal>native-image</goal>
 						</goals>
 						<phase>package</phase>
 					</execution>
-				</executions>
+				</executions>-->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -88,7 +98,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
@@ -118,7 +128,7 @@
 						<version>0.1.54</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 </project>
