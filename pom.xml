@@ -9,12 +9,18 @@
 		<scp.host>192.168.2.70</scp.host>
 		<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
 		<artifact_name>pi4j_ssd1306</artifact_name>
+	
+		<!-- JAVA COMPILER VERSIONS -->
+		<java.version>11</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-core</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>2.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -29,6 +35,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
 
 	<build>
 		<plugins>
@@ -53,8 +60,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
