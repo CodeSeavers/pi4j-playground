@@ -82,6 +82,7 @@ public class DisplayV2 {
             i2c.write((short) 0x40);
             i2c.write(Constants.SSD1306_DISPLAYALLON_RESUME);
             i2c.write(Constants.SSD1306_NORMALDISPLAY);
+
         } catch (Exception e) {
             // Handle me properly
             System.err.println(e.getMessage());
@@ -125,14 +126,10 @@ public class DisplayV2 {
         }
     }
 
-    private void writeRegister(int command, int register) {
-        try (var i2c = pi4j.i2c().create(this.config)) {
-            i2c.writeRegister(register, command);
-        } catch (Exception e) {
-            // Handle me
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-        }
+    private void writeRegister(I2C i2c, int command, int register) throws IOException {
+
+        i2c.writeRegister(register, command);
+
     }
 
     /**
@@ -162,12 +159,18 @@ public class DisplayV2 {
      * @param data Data array
      */
     private void data(byte[] data) {
-        for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < 16; j++) {
-                this.writeRegister(0x40, data[i]);
-                i++;
+        try (var i2c = pi4j.i2c().create(this.config)) {
+            for (int i = 0; i < data.length; i++) {
+                for (int j = 0; j < 16; j++) {
+                    this.writeRegister(i2c, 0x40, data[i]);
+                    i++;
+                }
+                i--;
             }
-            i--;
+        } catch (Exception e) {
+            // Handle me
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -227,5 +230,5 @@ public class DisplayV2 {
         }
 
         return true;
-    } 
+    }
 }
