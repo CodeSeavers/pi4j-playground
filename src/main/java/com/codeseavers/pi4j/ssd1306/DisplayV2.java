@@ -126,7 +126,8 @@ public class DisplayV2 {
     private void write(final int command) {
         try {
             System.out.println(command);
-            this.i2c.write(command);
+            int returnCode = this.i2c.write(command);
+            System.out.println("ReturnCode: " +  returnCode);
         } catch (final Exception e) {
             // Handle me
             System.out.println(e.getMessage());
@@ -136,7 +137,9 @@ public class DisplayV2 {
 
     private void writeRegister(final I2C i2c, final int command, final int register) throws IOException {
         System.out.println(command + ": " + register);
-        i2c.writeRegister(register, command);
+        int returnCode = i2c.writeRegister(register, command);
+        System.out.println("ReturnCode: " +  returnCode);
+
     }
 
     /**
