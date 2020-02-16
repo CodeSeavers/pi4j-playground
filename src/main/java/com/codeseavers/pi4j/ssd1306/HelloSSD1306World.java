@@ -22,7 +22,8 @@ public class HelloSSD1306World {
 				Thread.sleep(400);
 			}
 		} catch (Exception e) {
-
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			display.clear();
 			try {
