@@ -34,5 +34,4 @@ public class HelloSSD1306World {
 		}
 
 	}
-
 }
