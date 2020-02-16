@@ -10,6 +10,8 @@ import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2C;
 import com.pi4j.io.i2c.I2CConfig;
+import com.pi4j.io.i2c.I2CProvider;
+import com.pi4j.provider.Provider;
 
 public class DisplayV2 {
 
@@ -27,6 +29,8 @@ public class DisplayV2 {
     private final I2CConfig config;
     private I2C i2c;
 
+    private I2CProvider provider;
+
     public DisplayV2() throws Exception {
         this.width = 128;
         this.height = 64;
@@ -35,7 +39,8 @@ public class DisplayV2 {
         this.buffer = new byte[width * this.pages];
 
         this.pi4j = Pi4J.newAutoContext();
-
+        this.provider = pi4j.provider("pigpio-i2c");
+        
         this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
 
         this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
@@ -48,7 +53,7 @@ public class DisplayV2 {
 
     private void init() {
         try {
-            this.i2c = pi4j.i2c().create(this.config);
+            this.i2c = this.provider.create(this.config);
 
             i2c.write(Constants.SSD1306_DISPLAYOFF);
             i2c.write(Constants.SSD1306_SETDISPLAYCLOCKDIV);
