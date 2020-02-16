@@ -1,15 +1,15 @@
 package com.codeseavers.pi4j.ssd1306;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.io.IOException;
 
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2C;
 import com.pi4j.io.i2c.I2CConfig;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 
 public class DisplayV2 {
 
@@ -30,12 +30,13 @@ public class DisplayV2 {
     public DisplayV2() throws Exception {
         this.width = 128;
         this.height = 64;
+
         this.pages = (height / 8);
         this.buffer = new byte[width * this.pages];
 
         this.pi4j = Pi4J.newAutoContext();
 
-        config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
+        this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
 
         this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         this.graphics = this.img.createGraphics();
