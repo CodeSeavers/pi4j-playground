@@ -92,7 +92,7 @@ public class DisplayV2 {
 
         } catch (final Exception e) {
             // Handle me properly
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -129,7 +129,7 @@ public class DisplayV2 {
             this.i2c.write(command);
         } catch (final Exception e) {
             // Handle me
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -176,7 +176,7 @@ public class DisplayV2 {
             }
         } catch (final Exception e) {
             // Handle me
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
