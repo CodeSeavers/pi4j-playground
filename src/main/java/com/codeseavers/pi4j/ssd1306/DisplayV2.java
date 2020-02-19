@@ -120,6 +120,8 @@ public class DisplayV2 {
     public void begin(final int vccState) throws IOException {
         this.vccState = vccState;
         // For now ignore the reset pin stuff
+        // https://github.com/SmingHub/Sming/issues/501
+        this.write(Constants.SSD1306_SWITCHCAPVCC);
         // this.reset();
         this.init();
         this.write(Constants.SSD1306_DISPLAYON);
