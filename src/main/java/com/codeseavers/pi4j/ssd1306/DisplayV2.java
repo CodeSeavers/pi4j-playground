@@ -38,8 +38,10 @@ public class DisplayV2 {
         this.buffer = new byte[width * this.pages];
 
         this.pi4j = Pi4J.newAutoContext();
-        this.provider = pi4j.provider("pigpio-i2c");
-        
+        //this.provider = pi4j.provider("pigpio-i2c");
+        // Try with ClassName instead
+        this.provider = pi4j.provider("PiGpioI2CProvider");
+
         this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
 
         this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
