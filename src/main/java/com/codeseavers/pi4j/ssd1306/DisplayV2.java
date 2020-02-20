@@ -7,14 +7,11 @@ import java.awt.image.Raster;
 import java.io.IOException;
 
 import com.pi4j.Pi4J;
-import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2C;
 import com.pi4j.io.i2c.I2CConfig;
 import com.pi4j.io.i2c.I2CProvider;
 
 public class DisplayV2 {
-
-    private final Context pi4j;
 
     private final int I2C_DEVICE = 0x3C;
 
@@ -37,10 +34,16 @@ public class DisplayV2 {
         this.pages = (height / 8);
         this.buffer = new byte[width * this.pages];
 
-        this.pi4j = Pi4J.newAutoContext();
+        var pi4j = Pi4J.newAutoContext();
         this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
-        this.provider = pi4j.provider("com.pi4j.io.i2c.I2CProvider");
-        
+        this.provider = pi4j.provider("pigpio-i2c");
+
+        /*this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
+
+        PiGpio piGpio = PiGpio.newNativeInstance();
+        piGpio.initialize();
+        this.provider = new PiGpioI2CProviderImpl(piGpio);*/
+
         this.i2c = this.provider.create(this.config);
 
         this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);

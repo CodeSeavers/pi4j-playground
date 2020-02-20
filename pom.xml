@@ -34,6 +34,11 @@
 			<artifactId>pi4j-plugin-pigpio</artifactId>
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.pi4j</groupId>
+			<artifactId>pi4j-plugin-linuxfs</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -80,6 +85,29 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- DOWNLOAD RUNTIME DEPENDENCIES -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+							<excludeGroupIds>com.pi4j</excludeGroupIds>
+							<includeScope>runtime</includeScope>
+							<excludeTransitive>true</excludeTransitive>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

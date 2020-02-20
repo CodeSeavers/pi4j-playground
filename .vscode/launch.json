@@ -26,7 +26,9 @@
             "hostName": "192.168.2.80",
             "port": 8000,
             //"sourcePaths": ["/Users/alex/.m2/repository/com/pi4j/pi4j-core/2.0-SNAPSHOT/pi4j-core-2.0-SNAPSHOT-sources.jar"]
-            "sourcePaths": ["/Users/alex/dev/pi4j-v2/pi4j-core/src/main/java"]
+            "sourcePaths": ["/Users/alex/dev/pi4j-v2/pi4j-core/src/main/java",
+                            "/Users/alex/dev/pi4j-v2/plugins/pi4j-plugin-raspberrypi/src/main/java",
+                            "/Users/alex/dev/pi4j-v2/plugins/pi4j-plugin-pigpio/src/main/java"]
         }
     ]
 }
