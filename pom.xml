@@ -89,7 +89,6 @@
 	<profiles>
 		<profile>
 			<id>with-native-image</id>
-
 			<build>
 				<plugins>
 					<plugin>
@@ -114,8 +113,8 @@
 		<profile>
 			<id>with-remote-deployment</id>
 			<properties>
-				<scp.user>pi</scp.user>
-				<scp.host>192.168.2.70</scp.host>
+				<scp.user>ubuntu</scp.user>
+				<scp.host>192.168.2.80</scp.host>
 				<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
 			</properties>
 			<build>

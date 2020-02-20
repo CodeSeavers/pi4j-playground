@@ -39,7 +39,9 @@ public class DisplayV2 {
 
         this.pi4j = Pi4J.newAutoContext();
         this.config = I2C.newConfigBuilder(pi4j).id("my-i2c-bus").name("My IC Bus").bus(1).device(I2C_DEVICE).build();
-        this.provider = pi4j.provider("pigpio-i2c");
+        this.provider = pi4j.provider("com.pi4j.io.i2c.I2CProvider");
+        
+        this.i2c = this.provider.create(this.config);
 
         this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         this.graphics = this.img.createGraphics();
@@ -51,8 +53,6 @@ public class DisplayV2 {
 
     private void init() {
         try {
-            this.i2c = this.provider.create(this.config);
-
             i2c.write(Constants.SSD1306_DISPLAYOFF);
             i2c.write(Constants.SSD1306_SETDISPLAYCLOCKDIV);
             i2c.write(0x80);
@@ -130,9 +130,9 @@ public class DisplayV2 {
 
     private void write(final int command) {
         try {
-            System.out.println(command);
+            // System.out.println(command);
             int returnCode = this.i2c.write(command);
-            System.out.println("ReturnCode: " +  returnCode);
+            // System.out.println("ReturnCode: " +  returnCode);
         } catch (final Exception e) {
             // Handle me
             System.out.println(e.getMessage());
@@ -141,9 +141,9 @@ public class DisplayV2 {
     }
 
     private void writeRegister(final I2C i2c, final int command, final int register) throws IOException {
-        System.out.println(command + ": " + register);
+        // System.out.println(command + ": " + register);
         int returnCode = i2c.writeRegister(register, command);
-        System.out.println("ReturnCode: " +  returnCode);
+        // System.out.println("ReturnCode: " +  returnCode);
 
     }
 

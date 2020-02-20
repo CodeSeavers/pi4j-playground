@@ -25,6 +25,7 @@
             "request": "attach",
             "hostName": "192.168.2.80",
             "port": 8000,
+            "sourcePaths": ["/Users/alex/dev/pi4j-v2/pi4j-core/src/main/java"]
         }
     ]
 }
