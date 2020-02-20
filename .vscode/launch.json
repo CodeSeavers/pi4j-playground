@@ -1,0 +1,30 @@
+{
+    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
+    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
+    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-HelloSSD1306World<pi4j-playground>",
+            "request": "launch",
+            "mainClass": "com.codeseavers.pi4j.ssd1306.HelloSSD1306World",
+            "projectName": "pi4j-playground"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Remote) - HelloSSD1306World",
+            "projectName": "pi4j-playground",
+            "request": "attach",
+            "hostName": "192.168.2.80",
+            "port": 8000,
+        }
+    ]
+}

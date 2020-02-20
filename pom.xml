@@ -4,13 +4,9 @@
 	<artifactId>pi4j-playground</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>com.codeseavers.pi4j-playground</name>
-	<properties>
-		<scp.user>pi</scp.user>
-		<scp.host>192.168.2.70</scp.host>
-		<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
-		<artifact_name>pi4j_ssd1306</artifact_name>
 
-		<!-- JAVA COMPILER VERSIONS -->
+	<properties>
+		<artifact_name>pi4j_ssd1306</artifact_name>
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
@@ -52,25 +48,8 @@
 		</repository>
 	</repositories>
 
-
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.graalvm.nativeimage</groupId>
-				<artifactId>native-image-maven-plugin</artifactId>
-				<version>19.3.1</version>
-				<configuration>
-					<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback --no-server -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
-				</configuration>
-				<!--<executions>
-					<execution>
-						<goals>
-							<goal>native-image</goal>
-						</goals>
-						<phase>package</phase>
-					</execution>
-				</executions>-->
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -104,37 +83,76 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>scp-to-remote</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<scp file="${project.basedir}/target/${artifact_name}.jar" todir="${scp.user}@${scp.host}:${scp.dirCopyTo}" keyfile="${user.home}/.ssh/id_rsa" passphrase="" trust="true" verbose="true" failonerror="false" />
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>ant</groupId>
-						<artifactId>ant-jsch</artifactId>
-						<version>1.6.5</version>
-					</dependency>
-					<dependency>
-						<groupId>com.jcraft</groupId>
-						<artifactId>jsch</artifactId>
-						<version>0.1.54</version>
-					</dependency>
-				</dependencies>
-			</plugin>-->
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>with-native-image</id>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.nativeimage</groupId>
+						<artifactId>native-image-maven-plugin</artifactId>
+						<version>19.3.1</version>
+						<configuration>
+							<buildArgs>-H:+ReportExceptionStackTraces --initialize-at-build-time --verbose --no-fallback --no-server -H:+TraceClassInitialization -H:+PrintClassInitialization</buildArgs>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>native-image</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>with-remote-deployment</id>
+			<properties>
+				<scp.user>pi</scp.user>
+				<scp.host>192.168.2.70</scp.host>
+				<scp.dirCopyTo>~/dev/SSD1306</scp.dirCopyTo>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>scp-to-remote</id>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<scp file="${project.basedir}/target/${artifact_name}.jar" todir="${scp.user}@${scp.host}:${scp.dirCopyTo}" keyfile="${user.home}/.ssh/id_rsa" passphrase="" trust="true" verbose="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>ant</groupId>
+								<artifactId>ant-jsch</artifactId>
+								<version>1.6.5</version>
+							</dependency>
+							<dependency>
+								<groupId>com.jcraft</groupId>
+								<artifactId>jsch</artifactId>
+								<version>0.1.54</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
